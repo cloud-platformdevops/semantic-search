@@ -15,14 +15,18 @@ you can find multiple LLM integration Libraries below link
 https://docs.langchain.com/oss/python/integrations/providers/overview
 
 # Installation
-Install the required packages using pip:
-```
-pip install -r requirements.txt
-```
-Create a .env file in the root directory of the project and add the following environment variables:
-```
-GOOGLE_API_KEY=your_google_api_key
-```
+To run the semantic search process, follow these steps:
+
+1. **Configure Environment**: Ensure your `.env` file is set up with your `GOOGLE_API_KEY`.
+2. **Install Dependencies**: Run `pip install -r requirements.txt` to install LangChain and the Google Generative AI package.
+3. **Run the Embedding Script**: Execute the Store Embedding script to process the documents and store the embeddings in a vector store in the local directory PERSIST_DIR = "./chroma_db".
+   ```bash
+   python store-embedding.py
+   ```
+4. **Run the Search Script**: Execute the Search script to search for the most similar documents to a query based on their embeddings.
+   ```bash
+   python semantic-search.py
+   ```
 
 # Concepts
 ### 1. Documents and Document Loaders
@@ -72,7 +76,9 @@ Example:
 ```
 vector store.similarity_search(query, k)
 ```
-
+```
+query: 
+```
 
 ### 5. Retriever
 A Retriever is a Runnable wrapper around a VectorStore in Langchain. It adapts the VectorStore into LangChain’s execution model. This makes it easy to use the vector store in a LangChain chain or pipeline, Async & batch execution, and streaming.
