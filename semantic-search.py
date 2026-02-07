@@ -7,13 +7,14 @@ class SematicSearch():
 
     def __init__(self):
         print('init')
+        # The directory where the vector store will be saved
         PERSIST_DIR = "./chroma_db"
         self.client = genai.Client()
         embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
         self.vector_store = Chroma(
             collection_name="handbook",
             embedding_function=embeddings,
-            persist_directory=PERSIST_DIR,  # Where to save data locally, remove if not necessary
+            persist_directory=PERSIST_DIR,
         )
         print('done')
 
@@ -21,8 +22,8 @@ class SematicSearch():
         # Perform semantic search
         print("[INFO] Running semantic search")
         
-        results = self.vector_store.similarity_search(query)
-
+        results = self.vector_store.similarity_search(query,k=1)
+        
         # Display results
         print("\n[RESULTS]")
         for idx, doc in enumerate(results, start=1):
